@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Severity Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Accident Severity Prediction</h1>
+        <p>Enter your details to predict the severity of an accident.</p>
+        
+        <form action="/predict" method="POST">
+            <label for="sex_of_driver">Sex of Driver:</label>
+            <input type="text" name="sex_of_driver" placeholder="0 for Female, 1 for Male" required>
+
+            <label for="vehicle_type">Vehicle Type:</label>
+            <input type="text" name="vehicle_type" placeholder="Enter vehicle type" required>
+
+            <label for="speed_limit">Speed Limit (km/h):</label>
+            <input type="text" name="speed_limit" placeholder="Enter speed limit" required>
+
+            <label for="road_type">Road Type:</label>
+            <input type="text" name="road_type" placeholder="Scale from 0 to 10" required>
+
+            <label for="num_passengers">Number of Passengers:</label>
+            <input type="text" name="num_passengers" placeholder="Passengers in car" required>
+
+            <label for="day">Day:</label>
+            <input type="text" name="day" placeholder="0 for Sunday, 1 for Monday, etc." required>
+
+            <label for="light_conditions">Light Conditions:</label>
+            <input type="text" name="light_conditions" placeholder="0 for Day, 1 for Night" required>
+
+            <button type="submit">Predict Probability</button>
+        </form>
+
+        <!-- Display Prediction Result -->
+        {% if prediction %}
+            <div class="result">
+                <h2>Prediction Result:</h2>
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+
+        <!-- Display Error Message -->
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
